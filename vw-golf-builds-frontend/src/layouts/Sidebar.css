@@ -1,0 +1,27 @@
+.sidebar {
+  margin: 15px;
+  padding: 15px;
+  box-shadow: 10px 0px 20px -20px rgba(0, 0, 0, 0.2);
+  height: 100%;
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.sidebar li {
+  list-style: none;
+  display: flex;
+}
+
+.sidebar p {
+  margin: 10px;
+}
+
+.sidebar li input {
+  cursor: pointer;
+}
+
+.sidebar input[type="checkbox"] {
+  transform: scale(1.3);
+}

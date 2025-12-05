@@ -1,0 +1,37 @@
+.btn {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 30px;
+  background-color: rgb(194, 194, 194);
+  border: none;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary {
+  background-color: rgb(193, 255, 234);
+}
+
+.btn-primary:hover {
+  background-color: rgb(163, 255, 224);
+}
+
+.btn-secondary {
+  background-color: rgb(195, 255, 235);
+}
+
+.btn-secondary:hover {
+  background-color: rgb(163, 255, 224);
+}
+
+.btn-danger {
+  background-color: rgb(253, 147, 147);
+}
+
+.btn:disabled {
+  background-color: rgb(198, 196, 196);
+  cursor: not-allowed;
+}
+
+.btn:hover:not(:disabled) {
+  transform: scale(1.03);
+}
