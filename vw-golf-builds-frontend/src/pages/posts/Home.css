@@ -1,3 +1,26 @@
 .posts-and-sidebar {
   display: flex;
 }
+
+.header {
+  margin: 40px;
+  margin-left: 15px;
+}
+
+.header p {
+  margin: 0;
+}
+
+.header h2 {
+  font-weight: 500;
+  margin: 0;
+}
+
+.header p {
+  color: rgb(150, 147, 147);
+}
+
+.post-cards {
+  width: fit-content;
+  margin-left: 15px;
+}
