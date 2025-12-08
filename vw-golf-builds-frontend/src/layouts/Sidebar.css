@@ -1,8 +1,11 @@
 .sidebar {
   margin: 15px;
+  margin-bottom: 0;
   padding: 15px;
-  box-shadow: 10px 0px 20px -20px rgba(0, 0, 0, 0.2);
+  box-shadow: 10px 0px 20px -10px rgba(0, 0, 0, 0.2);
   height: 100%;
+  width: 280px;
+  flex-shrink: 0;
 }
 
 .sidebar ul {

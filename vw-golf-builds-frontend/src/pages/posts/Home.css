@@ -1,5 +1,15 @@
+.home-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .posts-and-sidebar {
   display: flex;
+}
+
+.posts {
+  flex: 1;
 }
 
 .header {

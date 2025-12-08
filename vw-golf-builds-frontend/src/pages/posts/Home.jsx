@@ -16,9 +16,10 @@ function Home() {
              <div className="post-cards">
                 <PostCard />
              </div>
+             
             </div>
             </div>
-           <Footer />
+            <Footer />
         </div>
     )
 }
