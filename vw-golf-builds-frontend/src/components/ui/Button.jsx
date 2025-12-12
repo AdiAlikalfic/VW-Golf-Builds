@@ -1,8 +1,8 @@
 import "./Button.css"
 
-function Button(props) {
+function Button({children, onClick, variant, disabled, type="button"}) {
     return (
-    <button onClick={props.onClick} disabled={props.disabled} className={`btn btn-${props.variant}`}>{props.text}</button>
+    <button type={type} onClick={onClick} disabled={disabled} className={`btn btn-${variant}`}>{children}</button>
 )
 }
 

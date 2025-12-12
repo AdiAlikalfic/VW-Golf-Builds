@@ -89,11 +89,14 @@ function Auth({setPage, setIsAuthenticated}) {
         {!isLogin && <Input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />}
 
         <Button
-        text= {isLogin ? (loading ? "Signing In..." : "Sign In") : (loading ? 'Creating Account...' : 'Register')}
         onClick={handleSubmit}
         variant="primary"
-        disabled={loading} />
-        <Button text={isLogin ? 'Create Account' : 'Back to Sign In'} onClick={toggleMode} variant="secondary" />
+        disabled={loading} >
+          {isLogin ? (loading ? "Signing In..." : "Sign In") : (loading ? 'Creating Account...' : 'Register')}
+        </Button>
+        <Button onClick={toggleMode} variant="primary" >
+          {isLogin ? 'Create Account' : 'Back to Sign In'}
+        </Button>
 
         </div>
     </div>

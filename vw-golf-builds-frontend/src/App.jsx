@@ -3,6 +3,7 @@ import './App.css'
 import Navbar from './layouts/Navbar'
 import Home from './pages/posts/Home'
 import Auth from './pages/auth/Auth'
+import CreatePost from './pages/create-a-post/create-a-post'
 import { getUser } from './utils/auth'
 
 function App() {
@@ -19,16 +20,17 @@ function App() {
 
   return (
     <>
-    <Navbar 
+    {page !== "createPost" && (<Navbar
     user={user} 
     setPage={setPage} 
     setUser={setUser} 
     isAuthenticated = {isAuthenticated}
     setIsAuthenticated = {setIsAuthenticated}
-    />
+    />)}
 
-    {page === "home" && <Home />}
+    {page === "home" && <Home isAuthenticated={isAuthenticated} setPage={setPage}/>}
     {page === "auth" && <Auth setPage={setPage} setIsAuthenticated={setIsAuthenticated} />}
+    {page === "createPost" && <CreatePost setPage={setPage}/>}
     </>
   )
 }

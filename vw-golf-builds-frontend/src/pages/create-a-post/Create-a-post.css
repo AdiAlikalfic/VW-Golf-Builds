@@ -1,0 +1,112 @@
+.create-post-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-page-navbar {
+  background-color: #0f172a;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  gap: 580px;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.back-btn {
+  margin: 20px;
+}
+
+.back-icon {
+  margin-right: 5px;
+}
+
+.header h3 {
+  color: white;
+  margin-bottom: 50px;
+}
+
+.add-photo-section {
+  width: 100%;
+  max-width: 1300px;
+  padding: 20px;
+  margin: 40px;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+}
+
+.add-photo-section h4,
+p {
+  margin: 0;
+}
+
+.drop-zone {
+  width: 100%;
+  height: 250px;
+  border: 2px dashed #888;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.2s;
+}
+
+.drop-zone:hover {
+  border-color: #333;
+}
+
+.preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.basic-information-section {
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  max-width: 1300px;
+}
+
+.basic-information-section p {
+  margin: 5px;
+}
+
+.year-and-model-dropdowns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.model-dropdown,
+.year-dropdown {
+  width: 40%;
+}
+
+.posting-agreement {
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 40px;
+}
+
+.agreement-btns {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}

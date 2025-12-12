@@ -36,12 +36,6 @@ function Sidebar() {
                     <li>
                         <input type="checkbox" /> <p>Golf Mk1</p>
                     </li>
-                    <li>
-                        <input type="checkbox" /> <p>Golf GTI</p>
-                    </li>
-                    <li>
-                        <input type="checkbox" /> <p>Golf TDI</p>
-                    </li> 
                 </ul>
             </div>
             <div className="year-list">

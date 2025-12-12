@@ -15,15 +15,16 @@ function Navbar({setPage, isAuthenticated, setIsAuthenticated}) {
             <div className="navbar-actions">
 
             {isAuthenticated ? (
-                <Button text="Logout" variant="primary" onClick={logout} />
+                <Button variant="primary" onClick={logout} >Logout</Button>
             )
             :
             (
             <Button 
-            text="Sign In"
             variant="primary" 
             onClick={() => setPage("auth")}
-            />
+            >
+            Sign In
+            </Button>
             )}
             
 

@@ -1,6 +1,7 @@
 import "./PostCard.css"
 import golfMk3 from "../../assets/vw-golf-mk3-build.jpg"
 import gzuz from "../../assets/gzuz.jpg"
+import { truncate } from "../../utils/text-shortner"
 
 function PostCard() {
 
@@ -33,7 +34,10 @@ function PostCard() {
             <div className="post-details">
                 <p className="post-title">VW Golf Mk3</p>
                 <p className="post-description">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel sapien nec nulla facilisis luctus sed eu magna.
+                    {truncate(
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+                        150
+                    )}
                 </p>
             </div>
         </div>

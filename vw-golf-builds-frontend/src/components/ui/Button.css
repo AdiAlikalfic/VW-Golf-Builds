@@ -16,15 +16,16 @@
 }
 
 .btn-secondary {
-  background-color: rgb(195, 255, 235);
+  background-color: #0f172a;
+  color: white;
 }
 
-.btn-secondary:hover {
+/* .btn-secondary:hover {
   background-color: rgb(163, 255, 224);
-}
+} */
 
 .btn-danger {
-  background-color: rgb(253, 147, 147);
+  background-color: rgb(232, 232, 232);
 }
 
 .btn:disabled {
