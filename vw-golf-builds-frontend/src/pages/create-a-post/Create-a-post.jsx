@@ -1,12 +1,17 @@
 import "./Create-a-Post.css";
 import {useDropzone} from "react-dropzone";
 import { useCallback, useState } from "react";
+import { createPost } from "../../api/postApi";
 import Select from "react-select";
 import Button from "../../components/ui/Button";
 import Input from "../../components/ui/Input";
 
 function CreatePost({setPage}) {
     const [image, setImage] = useState(null)
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [model, setModel] = useState(null);
+    const [year, setYear] = useState(null);
 
     const onDrop = useCallback((acceptedFiles) => {
         const file = acceptedFiles[0];
@@ -36,6 +41,30 @@ function CreatePost({setPage}) {
         {value: "2003-2008", label: "2003-2008"},
         {value: "1997-2002", label: "1997-2002"}
     ]
+
+    async function handleCreatePost() {
+        if (!title || !description || !model || !year) {
+            alert("All fields are required!")
+            return;
+        }
+
+        try {
+            const postData = {
+                title,
+                content: description,
+                carModel: model,
+                carYear: year,
+                // image 
+            };
+
+            await createPost(postData);
+            console.log(postData);
+            
+            setPage("home");
+        } catch (err) {
+            alert(err.message);
+        }
+    }
 
     return (
         <div className="create-post-page">
@@ -69,7 +98,7 @@ function CreatePost({setPage}) {
                     <Select
                       options={modelOptions}
                       placeholder="Choose model"
-                      onChange={(value) => console.log(value)}
+                      onChange={(option) => setModel(option.value)}
                     />
                 </div>
                 <div className="year-dropdown">
@@ -77,19 +106,25 @@ function CreatePost({setPage}) {
                     <Select
                       options={yearOptions}
                       placeholder="Choose year"
-                      onChange={(value) => console.log(value)}
+                      onChange={(option) => setYear(option.value)}
                     />
                 </div>
                 </div>
                 <div className="build-title">
                     <p>Build Title *</p>
-                    <Input type="text" placeholder="e.g., VW Golf Mk3 build" />
+                    <Input
+                     type="text" 
+                     placeholder="e.g., VW Golf Mk3 build" 
+                     value={title} 
+                     onChange={(e) => setTitle(e.target.value)} 
+                     />
                 </div>
                 <div className="description-section">
                     <p>Description *</p>
                     <Input
                      type="text" 
                      placeholder="Share details about your build like performance improvements, mods and your overall experience..." 
+                     onChange={(e) => setDescription(e.target.value)} 
                     />
                 </div>
             </div>
@@ -101,7 +136,7 @@ function CreatePost({setPage}) {
                 </p>
                 <div className="agreement-btns">
                      <Button variant="danger">Cancel</Button>
-                     <Button variant="primary">Publish Build</Button>
+                     <Button variant="primary" onClick={handleCreatePost}>Publish Build</Button>
                 </div>
             </div>
         </div>

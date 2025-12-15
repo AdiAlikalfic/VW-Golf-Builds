@@ -3,18 +3,25 @@ const { create } = require('../models/user');
 
 const createPost = async (req,res) => {
     try {
-        const {content, image} = req.body;
+        const {title, content, carModel, carYear,  image} = req.body;
 
-        if(!content){
+        if(!title || !content || !carModel || !carYear){
             return res.status(400).json({message: 'Content is required'});
         }
 
         const post = await Post.create({
+            title,
             content,
+            carModel,
+            carYear,
+            // image: image || null,
             author: req.user.id
-        })
+        });
 
         res.status(201).json(post);
+
+        
+
     } catch (err) {
         console.error(err);
         res.status(500).json({message: 'Server error while creating post'})
