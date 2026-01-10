@@ -36,6 +36,7 @@
 }
 
 .post-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: fit-content;
-  margin-left: 15px;
 }

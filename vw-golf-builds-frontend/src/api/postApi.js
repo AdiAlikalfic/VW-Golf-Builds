@@ -1,5 +1,6 @@
 const API_URL = "http://localhost:5000/api/posts"
 
+//create post function
 export async function createPost(postData) {
     const token = localStorage.getItem("token");
 
@@ -19,4 +20,17 @@ export async function createPost(postData) {
     }
 
     return data;
+}
+
+//fetching posts function
+export async function getPosts() {
+    const response = await fetch(API_URL);
+
+    if(!response.ok) {
+        throw new Error(data.message || "Failed to fetch the posts!")
+    }
+
+    const data = await response.json();
+
+    return data
 }

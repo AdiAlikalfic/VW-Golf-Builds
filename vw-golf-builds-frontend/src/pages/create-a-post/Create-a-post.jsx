@@ -54,7 +54,7 @@ function CreatePost({setPage}) {
                 content: description,
                 carModel: model,
                 carYear: year,
-                // image 
+                image 
             };
 
             await createPost(postData);

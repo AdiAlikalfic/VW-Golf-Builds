@@ -1,10 +1,15 @@
 import "./Navbar.css"
 import Button from "../components/ui/Button"
+import { CgProfile } from "react-icons/cg";
 
-function Navbar({setPage, isAuthenticated, setIsAuthenticated}) {
+
+function Navbar({setPage, isAuthenticated, setIsAuthenticated, setUser}) {
 
     function logout() {
         localStorage.removeItem("token")
+        localStorage.removeItem("user");
+        localStorage.removeItem("userId");
+        setUser(null)
         setIsAuthenticated(false)
         setPage('home')
     }
@@ -15,7 +20,10 @@ function Navbar({setPage, isAuthenticated, setIsAuthenticated}) {
             <div className="navbar-actions">
 
             {isAuthenticated ? (
-                <Button variant="primary" onClick={logout} >Logout</Button>
+                <><Button variant="primary" onClick={logout}>Logout</Button>
+                <div className="profile-picture">
+                    <CgProfile size={38} onClick={() => setPage("userProfile")}/>
+                </div></>
             )
             :
             (
