@@ -1,5 +1,11 @@
 .user-profile-page {
   margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-profile-page .builds-count {
+  margin-left: 100px;
 }
 
 .user-profile-info {
@@ -10,29 +16,15 @@
 }
 
 .user-avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 20px;
-}
-
-.user-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  height: fit-content;
+  display: flex;
+  margin: 30px 20px 20px 20px;
 }
 
 .user-details {
-  margin: 20px;
+  margin: 30px 20px 20px 20px;
   display: flex;
   flex-direction: column;
-}
-
-.user-avatar,
-.user-details {
-  margin-top: 30px;
 }
 
 .user-email-and-date {
@@ -88,4 +80,16 @@ hr {
 
 .edit-profile-btn button:hover {
   transform: scale(1.05);
+}
+
+.user-builds {
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
+  margin: 20px 100px 20px 100px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.user-builds p {
+  margin: 10px;
 }

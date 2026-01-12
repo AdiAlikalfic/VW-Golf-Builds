@@ -1,21 +1,37 @@
 import "./UserProfile.css"
-import React from "react"
-import gzuz from "../../assets/gzuz.jpg"
-import EditProfile from "./EditProfile"
+import { useEffect, useState } from "react"
+import Button from "../../components/ui/Button"
+import { CgProfile } from "react-icons/cg";
 
 function UserProfile({setPage}) {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        async function fetchUser() {
+            const res = await fetch("http://localhost:5000/api/auth/me", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+
+            const data = await res.json();
+            setUser(data);
+        }
+
+        fetchUser();
+    }, []);
 
     return (
         <div className="user-profile-page">
             <div className="user-profile-info">
                 <div className="user-avatar">
-                    <img src={gzuz} alt="user's avatar image" />
+                    <CgProfile size={100} />
                 </div>
                 <div className="user-details">
-                    <p>Username</p>
+                    <p>{user?.name}</p>
                     <div className="user-email-and-date">
                         {/* email icon goes here */}
-                        <p>User email</p>
+                        <p>{user?.email}</p>
                         {/* calendar icon goes here */}
                         <p>Sign up date</p>
                     </div>
@@ -33,6 +49,12 @@ function UserProfile({setPage}) {
                     {/* edit icon goes here */}
                 <button onClick={() => setPage("editProfile")}>Edit Profile</button>
                 </div>
+            </div>
+            <p className="builds-count">My builds (0)</p>
+            <div className="user-builds">
+                <h4>No builds yet</h4>
+                <p>Start sharing your VW Golf builds with the community!</p>
+                <Button variant="primary" onClick={() => setPage("createPost")} size={35}>Create your first build</Button>
             </div>
         </div>
     )
