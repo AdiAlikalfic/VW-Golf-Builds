@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Post = require('../models/post');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -98,9 +99,17 @@ const loginUser = async (req,res) => {
     const getCurrentUser = async (req,res) => {
         try {
             const user = await User.findById(req.user.id).select("-password");
-            res.json(user);
+            const posts = await Post.find({author: req.user.id}).sort({createdAt: -1});
+            const postsCount = posts.length;
+            const totalLikes = posts.reduce((sum, post) => sum + post.likes.length, 0);
+
+            res.json({
+                 user,
+                 posts,
+                 postsCount,
+                 totalLikes});
         } catch (err) {
-            res.status(500).json({message: "Error to fetch user", error: err})
+            res.status(500).json({message: "Error fetching the user", error: err})
         }
     }
 

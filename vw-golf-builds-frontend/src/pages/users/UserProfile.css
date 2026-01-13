@@ -30,6 +30,7 @@
 .user-email-and-date {
   display: flex;
   flex-direction: row;
+  width: 100%;
   gap: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -60,10 +61,13 @@ hr {
   flex: 0;
 }
 
+.details-and-btn {
+  display: flex;
+}
+
 .edit-profile-btn {
   display: flex;
   height: fit-content;
-  margin-left: 400px;
   margin-top: 30px;
 }
 
@@ -83,6 +87,8 @@ hr {
 }
 
 .user-builds {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   box-shadow: 0 1px 15px rgba(0, 0, 0, 0.3);
   margin: 20px 100px 20px 100px;
   padding: 20px;

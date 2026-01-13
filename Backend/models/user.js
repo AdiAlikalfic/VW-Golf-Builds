@@ -12,15 +12,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Password is required'],
+    },
+    bio: {
+        type: String,
+        required: false
     }
-})
+},
+{timestamps: true}
+);
 
 module.exports = mongoose.model("User", userSchema)
-
-// minlength: [6, 'Password must be at least 6 characters'],
-//         validate: {
-//             validator: function (value) {
-//                 return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(value)
-//             },
-//             message: 'Password must contain at least one letter and one number'
-//         }

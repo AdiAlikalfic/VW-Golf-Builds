@@ -8,6 +8,6 @@ router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.post('/posts', protect);
 router.get('/users', getUsers);
-router.get("/me", protect, getCurrentUser);
+router.get('/me', protect, getCurrentUser);
 
 module.exports = router
