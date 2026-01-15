@@ -3,6 +3,9 @@ import { useEffect, useState } from "react"
 import Button from "../../components/ui/Button"
 import PostCard from "../../components/posts/PostCard";
 import { CgProfile } from "react-icons/cg";
+import { CiCalendar } from "react-icons/ci";
+import { MdOutlineMail } from "react-icons/md";
+
 
 function UserProfile({setPage}) {
     const [profile, setProfile] = useState(null);
@@ -36,9 +39,9 @@ function UserProfile({setPage}) {
                 <div className="user-details">
                     <p>{profile?.user?.name}</p>
                     <div className="user-email-and-date">
-                        {/* email icon goes here */}
+                        <span><MdOutlineMail size={25}/></span>
                         <p>{profile?.user?.email}</p>
-                        {/* calendar icon goes here */}
+                        <span><CiCalendar size={25}/></span>
                         <p> Member since {profile?.user?.createdAt && new Date(profile.user.createdAt).toLocaleDateString()}</p>
                     </div>
                     <div className="user-bio">
@@ -60,11 +63,11 @@ function UserProfile({setPage}) {
             <p className="builds-count">My builds ({profile?.posts.length})</p>
             <div className="user-builds">
                 {profile?.posts.length === 0 ? (
-                <>
-                <h4>No builds yet</h4>
-                <p>Start sharing your VW Golf builds with the community!</p>
-                <Button variant="primary" onClick={() => setPage("createPost")} >Create your first build</Button>
-                </>
+                    <div className="no-builds">
+                        <h4>No builds yet</h4>
+                        <p>Start sharing your VW Golf builds with the community!</p>
+                        <Button variant="primary" onClick={() => setPage("createPost")} >Create your first build</Button>
+                    </div>
                 ) : (
                     profile.posts.map((post) => (
                         <PostCard key={post._id} post={post} />

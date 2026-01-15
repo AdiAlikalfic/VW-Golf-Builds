@@ -1,7 +1,7 @@
 import "./PostCard.css"
 import { useState } from "react"
 import golfMk3 from "../../assets/vw-golf-mk3-build.jpg"
-import gzuz from "../../assets/gzuz.jpg"
+import { CgProfile } from "react-icons/cg";
 import { truncate } from "../../utils/text-shortner"
 
 function PostCard({post, isLoggedIn}) {
@@ -31,7 +31,7 @@ function PostCard({post, isLoggedIn}) {
             <img src={post.image || golfMk3} alt={post.title} />
             <div className="user-info">
                 <div className="user-profile-img">
-                    <img src={gzuz} alt="user's profile picture" />
+                    <CgProfile size={35} />
                 </div>
                 <div className="user-name-and-date">
                     <p className="user-name">{post.author?.name}</p>
