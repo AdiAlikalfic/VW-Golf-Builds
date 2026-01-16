@@ -113,4 +113,27 @@ const loginUser = async (req,res) => {
         }
     }
 
-module.exports = {registerUser, loginUser, getUsers, getCurrentUser}
+    //update user profile
+    const updateUserProfile = async (req,res) => {
+        try {
+            const {name, email, bio} = req.body;
+
+            const updates = {};
+            if (name) updates.name = name;
+            if (email) updates.email = email;
+            if (bio) updates.bio = bio;
+
+            const user = await User.findByIdAndUpdate(
+                req.user.id,
+                updates,
+                {new: true, runValidators: true}
+            ).select("-password");
+
+            res.json(user);
+        } catch(err) {
+            console.error(err);
+            res.status(500).json({message: "Error updating profile", error: err.message});
+        }
+    }
+
+module.exports = {registerUser, loginUser, getUsers, getCurrentUser, updateUserProfile}

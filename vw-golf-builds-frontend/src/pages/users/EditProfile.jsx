@@ -6,6 +6,10 @@ import PostCard from "../../components/posts/PostCard";
 
 function EditProfile({setPage}) {
     const [profile, setProfile] = useState(null);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [bio, setBio] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         async function fetchUser() {
@@ -17,6 +21,10 @@ function EditProfile({setPage}) {
 
             const data = await res.json();
             setProfile(data);
+
+            setName(data.user.name);
+            setEmail(data.user.email);
+            setBio(data.user.bio || "");
         }
 
         fetchUser();
@@ -25,6 +33,38 @@ function EditProfile({setPage}) {
     if (!profile) {
         return <p>Loading profile...</p>
     }
+
+    //user profile update
+    async function handleProfileUpdate(e) {
+        e.preventDefault();
+        setLoading(true);
+
+        const res = await fetch("http://localhost:5000/api/auth/me", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            },
+            body: JSON.stringify({name, bio})
+        })
+
+            const data = await res.json();
+
+            if(res.ok) {
+            console.log("Profile updated successfully");
+            setProfile((prevProfile) => ({
+                ...prevProfile,
+                user: data
+            }));
+            } else {
+            console.error("Error updating profile")
+            }
+
+            setLoading(false);
+            setPage("userProfile");
+        }
+
+    
 
     return (
         <div className="edit-profile-page">
@@ -36,17 +76,15 @@ function EditProfile({setPage}) {
                     </p>
                 </div>
                 <div className="form">
-                    <label htmlFor="">Name</label>
-                    <Input type="text" placeholder={profile?.user.name} />
-                    <label htmlFor="">Email</label>
-                    <Input type="email" placeholder={profile?.user.email} />
-                    <label htmlFor="">Bio</label>
-                    <Input type="text" placeholder={profile?.user.bio || 'Short bio'} />
+                    <label>Name</label>
+                    <Input type="text" value={name} placeholder={profile?.user.name} onChange={e => setName(e.target.value)} />
+                    <label>Bio</label>
+                    <Input type="text" value={bio} placeholder={profile?.user.bio || 'Short bio'} onChange={e => setBio(e.target.value)} />
                 </div>
                 <div className="buttons">
                     <button onClick={() => setPage("userProfile")} className="cancel-btn">X Cancel</button>
                     {/* floppy disk icon goes here */}
-                    <button className="save-changes-btn">Save Changes</button>
+                    <button className="save-changes-btn" onClick={handleProfileUpdate} disabled={loading}>Save Changes</button>
                 </div>
             </div>
             <p className="builds-count">My builds ({profile?.posts.length})</p>
