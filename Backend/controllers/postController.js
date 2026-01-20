@@ -50,20 +50,38 @@ const likePost = async (req,res) => {
 
         const userId = req.user.id;
 
-        if(post.likes.includes(userId)) {
-            //unlike post
+        if(post.author.toString() === userId) {
+            return res.status(400).json({message: "You cannot like your own post"});
+        }
+
+        const alreadyLiked = post.likes.some(
+            id => id.toString() === userId
+        )
+
+        if(alreadyLiked) {
             post.likes = post.likes.filter(
                 id => id.toString() !== userId
-            )
+            );
         } else {
-            post.likes.push(userId)
+            post.likes.push(userId);
         }
+
+
+        // if(post.likes.includes(userId)) {
+        //     //unlike post
+        //     post.likes = post.likes.filter(
+        //         id => id.toString() !== userId
+        //     )
+        // } else {
+        //     post.likes.push(userId)
+        // }
 
         await post.save()
 
         res.json({
             likesCount: post.likes.length,
-            likes: post.likes
+            likedByUser: !alreadyLiked
+            // likes: post.likes
         })
     } catch (err) {
         console.error(err);

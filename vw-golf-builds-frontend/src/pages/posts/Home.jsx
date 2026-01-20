@@ -9,6 +9,7 @@ import "./Home.css"
 function Home({isAuthenticated, setPage}) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         async function fetchPosts() {
@@ -24,6 +25,27 @@ function Home({isAuthenticated, setPage}) {
 
         fetchPosts()
     }, [])
+
+    useEffect(() => {
+        async function fetchCurrentUser() {
+            if (!isAuthenticated) return;
+
+            try{
+                const res = await fetch("http://localhost:5000/api/auth/me", {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem("token")}`
+                    }
+                });
+
+                const data = await res.json();
+                setUserId(data.user._id);
+            } catch (err) {
+                console.error("Fail to fetch user", err)
+            }
+        }
+
+        fetchCurrentUser();
+    }, [isAuthenticated]);
 
     if (loading) return <p>Loading Builds...</p>
 
@@ -42,7 +64,7 @@ function Home({isAuthenticated, setPage}) {
              </div>
              <div className="post-cards">
                 {posts.map(post => (
-                    <PostCard key={post._id} post={post} isLoggedIn={isAuthenticated}/>
+                    <PostCard key={post._id} post={post} isLoggedIn={isAuthenticated} userId={userId}/>
                 ))}
              </div>
             </div>

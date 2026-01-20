@@ -2,12 +2,19 @@ import "./PostCard.css"
 import { useState } from "react"
 import golfMk3 from "../../assets/vw-golf-mk3-build.jpg"
 import { CgProfile } from "react-icons/cg";
+import { CiHeart } from "react-icons/ci";
+import { IoHeart } from "react-icons/io5";
 import { truncate } from "../../utils/text-shortner"
 
-function PostCard({post, isLoggedIn}) {
-    const userId = localStorage.getItem("userId");
+function PostCard({post, isLoggedIn, userId}) {
     const [likesCount, setLikesCount] = useState(post.likes?.length || 0);
     const [liked, setLiked] = useState(post.likes?.includes(userId));
+
+    const authorId = typeof post.author === "string" ? post.author : post.author?._id;
+    
+    const isOwnPost = authorId === userId;
+
+    const isDisabled = !isLoggedIn || isOwnPost;
 
     async function handleLike() {
         const res = await fetch (
@@ -22,9 +29,19 @@ function PostCard({post, isLoggedIn}) {
 
         const data = await res.json();
 
+        if(!res.ok) {
+            console.warn(data.message);
+            return;
+        }
+
         setLikesCount(data.likesCount);
         setLiked(data.likedByUser)
     }
+
+    console.log("USER:", userId);
+console.log("AUTHOR:", authorId);
+console.log("OWN POST?", isOwnPost);
+
 
     return(
         <div className="post-card">
@@ -38,28 +55,17 @@ function PostCard({post, isLoggedIn}) {
                     <p className="post-date">{new Date(post.createdAt).toLocaleDateString()}</p>
                 </div>
                 <div className="likes">
-                    <div className={`likes-icon ${!isLoggedIn ? "disabled" : ""}`} onClick={isLoggedIn ? handleLike : undefined}>
+                    <div 
+                    className={`likes-icon ${isDisabled ? "disabled" : ""}`} 
+                    onClick={() => {
+                        if (isDisabled) return;
+                        handleLike();
+                    }}
+                    >
                         {liked ? (
-                        <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="16" 
-                        height="16" 
-                        fill="currentColor" 
-                        className="bi bi-heart-fill" 
-                        viewBox="0 0 16 16">
-                         <path fillRule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                        </svg>
+                        <IoHeart size={16} />
                         ) : (
-                        <svg 
-                        xmlns="http://www.w3.org/2000/svg" 
-                        width="16" 
-                        height="16" 
-                        fill="currentColor" 
-                        className="bi bi-heart" 
-                        viewBox="0 0 16 16"
-                        >
-                         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
-                        </svg>
+                        <CiHeart size={20} />
                         )}
                     </div>
                     <div className="likes-number">
